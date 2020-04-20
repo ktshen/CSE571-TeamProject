@@ -219,6 +219,11 @@ class PositionSearchProblem(search.SearchProblem):
             if self.walls[x][y]: return 999999
             cost += self.costFn((x,y))
         return cost
+        
+class BFSPositionSearchAgent(SearchAgent):
+    def __init__(self):
+        self.searchFunction = lambda prob: search.breadthFirstSearch(prob)
+        self.searchType = PositionSearchProblem
 
 class AStarPositionSearchAgent(SearchAgent):
     "A SearchAgent for PositionSearchProblem using A* and your positionHeuristic"
@@ -230,6 +235,12 @@ class biDirectionalAStarPositionSearchAgent(SearchAgent):
     def __init__(self):
         self.searchFunction = lambda prob: search.biDirectionalAStarSearch(prob, positionHeuristic)
         self.searchType = PositionSearchProblem
+
+class biDirectionalBFSPositionSearchAgent(SearchAgent):
+    def __init__(self):
+        self.searchFunction = lambda prob: search.biDirectionalBFSSearch(prob)
+        self.searchType = PositionSearchProblem
+
 
 def positionHeuristic(state, problem, destination="goal"):
     if destination == 'goal':

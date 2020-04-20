@@ -18,8 +18,8 @@ Pacman agents (in searchAgents.py).
 """
 
 import util
-from game import Directions
-from util import PriorityQueue
+from game import reverseActions
+from util import PriorityQueue, Queue
 
 
 class SearchProblem:
@@ -195,11 +195,7 @@ def biDirectionalAStarSearch(problem, heuristic):
     """
         The algorithm is actually same as Astar, the only difference is that we start from both start state and goal state. When both processes achieve to the same state, we can then know that we find a path from the start state to the goal by concatenating the path searched in both processes
     """
-    def __reversedAction(actions):
-        """
-        Reversing the direction of all actions
-        """
-        return [Directions.REVERSE[x] for x in actions][::-1]
+
 
     # Initialiate necessary data structures for following algorithm
     pq1, pq2 = [PriorityQueue() for _ in range(2)]
@@ -217,7 +213,7 @@ def biDirectionalAStarSearch(problem, heuristic):
 
         # When there is a matching state, we then return the path
         if problem.isGoalState(current_state, visited_states2):
-            return path + __reversedAction(visited_states2[current_state])
+            return path + reverseActions(visited_states2[current_state])
 
         for successor_state, action, cost in problem.getSuccessors(current_state):
             if successor_state in visited_states1:
@@ -231,7 +227,7 @@ def biDirectionalAStarSearch(problem, heuristic):
         # Process from the goal state
         current_state, path, current_g = pq2.pop()
         if problem.isGoalState(current_state, visited_states1):
-            return __reversedAction(visited_states1[current_state]) + path
+            return reverseActions(visited_states1[current_state]) + path
 
         for successor_state, action, cost in problem.getSuccessors(current_state):
             if successor_state in visited_states2:
@@ -244,6 +240,45 @@ def biDirectionalAStarSearch(problem, heuristic):
 
     return []
 
+def biDirectionalBFSSearch(problem):
+    q1, q2 = [list() for _ in range(2)]
+    visited1, visited2 = [dict() for _ in range(2)]
+
+    q1.append((problem.getStartState(), []))
+    q2.append((problem.goal, []))
+    visited1[problem.getStartState()] = []
+    visited2[problem.goal] = []
+
+    while len(q1) and len(q2):
+        # Progress starts from the start state
+        new_queue = []
+        for state, path in q1:
+            if state in visited2:
+                return path + reverseActions(visited2[state])
+
+            for successor_state, action, cost in problem.getSuccessors(state):
+                if successor_state in visited1:
+                     continue
+                next_path = path + [action]
+                new_queue.append([successor_state, next_path])
+                visited1[successor_state] = next_path
+        q1 = new_queue
+        new_queue = []
+
+        # Progress starts from the goal state
+        for state, path in q2:
+            if state in visited1:
+                return reverseActions(visited1[state]) + path
+
+            for successor_state, action, cost in problem.getSuccessors(state):
+                if successor_state in visited2:
+                     continue
+                next_path = path + [action]
+                new_queue.append([successor_state, next_path])
+                visited2[successor_state] = next_path
+        q2 = new_queue
+
+    return []
 
 # Abbreviations
 bfs = breadthFirstSearch
@@ -251,3 +286,4 @@ dfs = depthFirstSearch
 astar = aStarSearch
 ucs = uniformCostSearch
 bdastar = biDirectionalAStarSearch
+bdbfs = biDirectionalBFSSearch
