@@ -219,10 +219,15 @@ class PositionSearchProblem(search.SearchProblem):
             if self.walls[x][y]: return 999999
             cost += self.costFn((x,y))
         return cost
-        
+
 class BFSPositionSearchAgent(SearchAgent):
     def __init__(self):
         self.searchFunction = lambda prob: search.breadthFirstSearch(prob)
+        self.searchType = PositionSearchProblem
+
+class DFSPositionSearchAgent(SearchAgent):
+    def __init__(self):
+        self.searchFunction = lambda prob: search.depthFirstSearch(prob)
         self.searchType = PositionSearchProblem
 
 class AStarPositionSearchAgent(SearchAgent):
