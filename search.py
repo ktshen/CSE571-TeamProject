@@ -18,6 +18,9 @@ Pacman agents (in searchAgents.py).
 """
 
 import util
+from game import Directions
+from util import PriorityQueue
+
 
 class SearchProblem:
     """
@@ -61,16 +64,6 @@ class SearchProblem:
         """
         util.raiseNotDefined()
 
-
-def tinyMazeSearch(problem):
-    """
-    Returns a sequence of moves that solves tinyMaze.  For any other maze, the
-    sequence of moves will be incorrect, so only use this for tinyMaze.
-    """
-    from game import Directions
-    s = Directions.SOUTH
-    w = Directions.WEST
-    return  [s, s, w, s, w, w, s, w]
 
 def depthFirstSearch(problem):
     """
@@ -197,8 +190,64 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                 next_f = next_g + heuristic(successor_state, problem)
                 queue.push([successor_state, next_path, next_g], next_f)
 
+
+def biDirectionalAStarSearch(problem, heuristic):
+    """
+        The algorithm is actually same as Astar, the only difference is that we start from both start state and goal state. When both processes achieve to the same state, we can then know that we find a path from the start state to the goal by concatenating the path searched in both processes
+    """
+    def __reversedAction(actions):
+        """
+        Reversing the direction of all actions
+        """
+        return [Directions.REVERSE[x] for x in actions][::-1]
+
+    # Initialiate necessary data structures for following algorithm
+    pq1, pq2 = [PriorityQueue() for _ in range(2)]
+    visited_states1, visited_states2 = [dict() for _ in range(2)]
+
+    pq1.push((problem.getStartState(), [], 0), heuristic(problem.getStartState(), problem, ))
+    pq2.push((problem.goal, [], 0), heuristic(problem.goal, problem, ))
+    # Key is the state and the item stores all the actions to get the corresponding state
+    visited_states1[problem.getStartState()] = []
+    visited_states2[problem.goal] = []
+
+    while not pq1.isEmpty() and not pq2.isEmpty():
+        # Start process from the start state
+        current_state, path, current_g = pq1.pop()
+
+        # When there is a matching state, we then return the path
+        if problem.isGoalState(current_state, visited_states2):
+            return path + __reversedAction(visited_states2[current_state])
+
+        for successor_state, action, cost in problem.getSuccessors(current_state):
+            if successor_state in visited_states1:
+                 continue
+            next_path = path + [action]
+            next_g = current_g + cost
+            next_f = next_g + heuristic(successor_state, problem, 'goal')
+            pq1.push((successor_state, next_path, next_g), next_f)
+            visited_states1[successor_state] = next_path
+
+        # Process from the goal state
+        current_state, path, current_g = pq2.pop()
+        if problem.isGoalState(current_state, visited_states1):
+            return __reversedAction(visited_states1[current_state]) + path
+
+        for successor_state, action, cost in problem.getSuccessors(current_state):
+            if successor_state in visited_states2:
+                 continue
+            next_path = path + [action]
+            next_g = current_g + cost
+            next_f = next_g + heuristic(successor_state, problem, 'start')
+            pq2.push((successor_state, next_path, next_g), next_f)
+            visited_states2[successor_state] = next_path
+
+    return []
+
+
 # Abbreviations
 bfs = breadthFirstSearch
 dfs = depthFirstSearch
 astar = aStarSearch
 ucs = uniformCostSearch
+bdastar = biDirectionalAStarSearch
