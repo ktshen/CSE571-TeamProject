@@ -19,7 +19,7 @@ Pacman agents (in searchAgents.py).
 
 import util
 from game import reverseActions
-from util import PriorityQueue, Queue
+from util import PriorityQueue
 
 
 class SearchProblem:
