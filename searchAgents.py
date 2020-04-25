@@ -246,6 +246,15 @@ class biDirectionalBFSPositionSearchAgent(SearchAgent):
         self.searchFunction = lambda prob: search.biDirectionalBFSSearch(prob)
         self.searchType = PositionSearchProblem
 
+class biDirectionalMMSearchAgent(SearchAgent):
+    def __init__(self):
+        self.searchFunction = lambda prob: search.biDirectionalMMSearch(prob, positionHeuristic)
+        self.searchType = PositionSearchProblem
+
+class biDirectionalMM0SearchAgent(SearchAgent):
+    def __init__(self):
+        self.searchFunction = lambda prob: search.biDirectionalMM0Search(prob)
+        self.searchType = PositionSearchProblem
 
 def positionHeuristic(state, problem, destination="goal"):
     if destination == 'goal':

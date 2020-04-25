@@ -7,8 +7,8 @@ By adding new algorithms (bidirectional implementations in BFS and Astar) to cou
 - BFS: `python pacman.py -l mediumMaze -p BFSPositionSearchAgent`
 - DFS: `python pacman.py -l mediumMaze -p DFSPositionSearchAgent`
 - Astar: `python pacman.py -l mediumMaze -p AStarPositionSearchAgent`
-- Bidirectional BFS: `python pacman.py -l mediumMaze -p  biDirectionalAStarPositionSearchAgent`
-- Bidirectional Astar Search: `python pacman.py -l mediumMaze -p biDirectionalBFSPositionSearchAgent`
+- Bidirectional BFS: `python pacman.py -l mediumMaze -p biDirectionalBFSPositionSearchAgent`
+- Bidirectional Astar Search: `python pacman.py -l mediumMaze -p biDirectionalAStarPositionSearchAgent`
 
 
 

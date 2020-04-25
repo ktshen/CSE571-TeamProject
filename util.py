@@ -179,6 +179,9 @@ class PriorityQueue:
         self.heap = []
         self.count = 0
 
+    def __getitem__(self, index):
+        return self.heap[index][2][0]
+
     def push(self, item, priority):
         entry = (priority, self.count, item)
         heapq.heappush(self.heap, entry)
@@ -187,6 +190,12 @@ class PriorityQueue:
     def pop(self):
         (_, _, item) = heapq.heappop(self.heap)
         return item
+
+    def pop_f(self):
+        return heapq.heappop(self.heap)
+    
+    def peek(self):
+        return self.heap[0]
 
     def isEmpty(self):
         return len(self.heap) == 0
