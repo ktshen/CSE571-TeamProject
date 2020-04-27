@@ -361,7 +361,9 @@ def biDirectionalMMSearch(problem, heuristic):
         C = min(prMinF, prMinB)
       
         if U <= max(C, f_min_f, f_min_b, g_min_f + g_min_b + e):
-            return gF[openF[-1]][3] + reverseActions(gB[openB[-1]][3])
+            for state in openB:
+                if state in openF:
+                    return gF[state][3] + reverseActions(gB[state][3])
 
         if C == prMinF:
             # Forward
