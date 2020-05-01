@@ -21,13 +21,13 @@ By adding new algorithms (bidirectional implementations in BFS and Astar) to cou
 ## Topic
 Bi-directional Search
 ## Team Contribution
-AnChien Liu
+- AnChien Liu
 • Summerize the report, summarize the result.
-Mark McMillan
+- Mark McMillan
 • Coding part: Implement the MM and MM 0 and do
 analysis.
-Afsinur Rahman
+- Afsinur Rahman
 • Coding part: Create a new layout and do analysis.
-Kuan-Ting Shen
+- Kuan-Ting Shen
 • Coding part: Implement the BFS, A-STAR search in
 Bidirectional search.
