@@ -1,4 +1,4 @@
-# CSE571-TeamProject
+# CSE 571-TeamProject
 By adding new algorithms (bidirectional implementations in BFS and Astar) to course project 1, our project only supports PositionSearchProblem with five different agents and four types of maze(tiny, small, medium, big, huge0, huge1, and huge2).
 
 ## Instructions
@@ -23,12 +23,11 @@ By adding new algorithms (bidirectional implementations in BFS and Astar) to cou
 Bi-directional Search
 ## Team Contribution
 - AnChien Liu
-• Summerize the report, summarize the result.
+• Summarized the report, and summarized the results.
 - Mark McMillan
-• Coding part: Implement the MM and MM 0 and do
-analysis.
+• Coding part: Implemented the MM and MM<sub>0</sub>, and performed analysis.
 - Afsinur Rahman
-• Coding part: Create a new layout and do analysis.
+• Coding part: Created new layouts, and performed analysis.
 - Kuan-Ting Shen
-• Coding part: Implement the BFS, A-STAR search in
+• Coding part: Implemented the BFS, A-STAR search in Bidirectional search, and performed analysis.
 Bidirectional search.
