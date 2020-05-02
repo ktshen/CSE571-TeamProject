@@ -1,5 +1,5 @@
 # CSE 571-TeamProject
-Implementation and analysis of the bi-directional search described in the paper [Bidirectional Search That Is Guaranteed to Meet in the Middle](https://pages.github.com/) by Robert C. Holte, Ariel Felner, Guni Sharon, and Nathan R. Sturtevant. This was done in the pacman environment, which was provided to us as the instructor.
+Implementation and analysis of the bi-directional search described in the paper 'Bidirectional Search That Is Guaranteed to Meet in the Middle' by Robert C. Holte, Ariel Felner, Guni Sharon, and Nathan R. Sturtevant. This was done in the pacman environment, which was provided to us as the instructor.
 
 ## Instructions
 1. Change directory to "CSE571-TeamProject"
