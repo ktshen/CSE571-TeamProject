@@ -20,7 +20,7 @@ Implementation and analysis of the bi-directional search described in the paper 
 - Afsinur Rahman [(@arahma16)](https://github.com/arahma16)
 - Mark McMillan [(@mark-mcm)](https://github.com/mark-mcm)
 ## Topic
-Bi-directional Search
+Topic 1: Bi-directional Search
 ## Team Contribution
 - AnChien Liu
 • Summarized the report, and summarized the results.
